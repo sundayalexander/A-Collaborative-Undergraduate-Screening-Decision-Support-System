@@ -1,0 +1,72 @@
+<!--left-fixed -navigation-->
+<div class=" sidebar" role="navigation">
+    <div class="navbar-collapse">
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+            <ul class="nav" id="side-menu">
+                <li>
+                    <a href="{{ path('admin_dashboard') }}"><i class="fa fa-dashboard nav_icon"></i>Dashboard</a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_view_students') }}" ><i class="fa fa-users nav_icon"></i>View Students</a>
+                    <!-- /nav-second-level -->
+                </li>
+                <li>
+                    {% if page ends with "pending" %}
+                    <a href="{{ path('admin_pending_students') }}" class="active"><i class="fa fa-list nav_icon"></i>Pending Students</a>
+                    {% else %}
+                        <a href="{{ path('admin_pending_students') }}"><i class="fa fa-list nav_icon"></i>Pending Students</a>
+                    {% endif %}
+                    <!-- /nav-second-level -->
+                </li>
+                <li>
+                    {% if page ends with "approved" %}
+                    <a href="{{ path('admin_approved_students') }}" class="active"><i class="fa fa-bookmark nav_icon"></i>Approved Students</a>
+                    {% else %}
+                        <a href="{{ path('admin_approved_students') }}" ><i class="fa fa-bookmark nav_icon"></i>Approved Students</a>
+                    {% endif %}
+                    <!-- /nav-second-level -->
+                </li>
+                <li>
+                    <a href="{{ path('admin_logout') }}" style="color: red;"><i class="fa fa-sign-out nav_icon"></i>Logout</a>
+                </li>
+            </ul>
+            <!-- //sidebar-collapse -->
+        </nav>
+    </div>
+</div>
+<!--left-fixed -navigation-->
+<!-- header-starts -->
+<div class="sticky-header header-section ">
+    <div class="header-left">
+        <!--toggle button start-->
+        <button id="showLeftPush"><i class="fa fa-bars"></i></button>
+        <!--toggle button end-->
+        <!--logo -->
+        <div class="logo">
+            <a href="{{ path('admin_dashboard') }}">
+                <h1>ONLINE UNDERGRADUATE STUDENT'S</h1>
+                <span> SCREENING DECISION SUPPORT SYSTEM</span>
+            </a>
+        </div>
+        <!--//logo-->
+        <div class="clearfix"> </div>
+    </div>
+    <div class="header-right">
+        <!--notification menu end -->
+        <div class="profile_details">
+            <ul>
+                <li class="dropdown profile_details_drop">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <div class="profile_img">
+                            <span class="prfil-img"><img src="{{ asset('img/favicon/apple-icon-60x60.png') }}" alt="logo"> </span>
+
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+    <div class="clearfix"> </div>
+</div>
+<!-- //header-ends -->

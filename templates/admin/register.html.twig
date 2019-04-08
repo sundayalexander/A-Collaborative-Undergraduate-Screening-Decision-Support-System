@@ -1,0 +1,81 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <br />
+    <div class="container" style="height:100%">
+        <div class="row text-center ">
+            <div class="col-md-12"> <br />
+                <!-- <img style="width:105px;height:100px;" src="<?php echo WEB_URL; ?>img/upload/img.png" /> --> </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12 col-xs-offset-0" style="border-radius:0px;">
+                <div class="panel panel-default" id="loginBox" style="background-color: #DEE7F3;">
+                    <div class="panel-heading" style="text-align: center;
+                    background-color: #DEE7F3; border-bottom: solid 1px white;">
+                        <strong> USSDSS - Admin Registration </strong>
+                    </div>
+                    <style>
+                        label{
+                            color: #31516A;
+                            font-weight: normal;
+                        }
+                        input[type="text"], .panel-body form select{
+                            height:50px;
+                        }
+                        .panel-body form ul li{
+                            color: red;
+                            list-style: none;
+                            padding: 0em .1em;
+                            font-size: small;
+                        }
+                    </style>
+                    <div class="panel-body">
+                        {{ form_start(form) }}
+                            {{ form_errors(form) }}
+                            {{ form_label(form.username) }}
+                            {{ form_errors(form.username) }}
+                            <div class="form-group input-group">
+                                <span class="input-group-addon" style="background-color: #DEE7F3; border-color: #FFFFFF;">
+                                    <i class="fa fa-user"  ></i>
+                                </span>
+                                {{ form_widget(form.username,{attr:{style:'border-color: white;'}}) }}
+                            </div>
+                            {{ form_label(form.password) }}
+                            {{ form_errors(form.password) }}
+                            <div class="form-group input-group">
+                                <span class="input-group-addon" style="background-color: #DEE7F3; border-color: #FFFFFF;">
+                                    <i class="fa fa-key"  ></i>
+                                </span>
+                                {{ form_widget(form.password,{attr:{style:'border-color: white;'}}) }}
+                            </div>
+                        {{ form_label(form.unit) }}
+                        {{ form_errors(form.unit) }}
+                        <div class="form-group input-group">
+                                <span class="input-group-addon" style="background-color: #DEE7F3; border-color: #FFFFFF;">
+                                    <i class="fa fa-group"  ></i>
+                                </span>
+                            {{ form_widget(form.unit,{attr:{style:'border-color: white;'}}) }}
+                        </div>
+                            <div align="center">
+                                <button style="width:100%; border: solid 2px #FFFFFF;" type="submit" id="login" class="btn btn-primary" >
+                                    Register <span class="fa fa-sign-in"></span>
+                                </button>
+                            </div><br >
+                            <hr />
+                            <div align="center">
+                                <p>
+                                    <span class="fa fa-warning alert-info"></span>
+                                    Note: If registered,
+                                    <a style="color: #31516A; text-decoration: underline;" href="{{ path('admin_login') }}" >
+                                        login here
+                                    </a>
+                                    and continue your screening.
+                                </p>
+                            </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

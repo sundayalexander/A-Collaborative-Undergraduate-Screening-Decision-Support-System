@@ -1,0 +1,245 @@
+{% extends "base.html.twig" %}
+{% block title %}Admin:: {{ unit }}{% endblock %}
+{% block body %}
+	<div class="main-content">
+        {{ include('admin/navigation.html.twig',{page:"view-students"}) }}
+		<!-- main content start-->
+		<div id="page-wrapper">
+			<div class="main-page">
+			<h3 class="title1">{{ unit }}</h3>
+                <div class="form-grids row widget-shadow" data-example-id="basic-forms">
+					{% if record.approve %}
+						<p class="alert-success"><strong>Status: </strong> Approved!</p>
+					{% else %}
+						<p>
+							<a style="width:50%; float: right;" id="update" class="btn btn-success" href="{{ path('admin_approve',{id: record.id}) }}" >
+								<span class="fa glyphicon-ok"></span> Approve!
+							</a>
+						</p>
+					{% endif %}
+                    <div class="form-title">
+                        <h4>Student Detail:</h4>
+                    </div>
+                    <div class="form-body">
+						<p>
+							<strong>Maric Number/Jamb Reg:</strong> {{ record.student.matricNumber }}
+						</p>
+						{% if record.student.adminUnit is not null %}
+						<p>
+							<strong>Name:</strong> {{ record.student.adminUnit.firstName }} {{ record.student.adminUnit.middleName }} {{ record.student.adminUnit.lastName }}
+						</p>
+                        {% endif %}
+						{% if unit ends with "AdminUnit" %}
+							<p>
+								<strong>Date of Birth:</strong> {{ record.student.adminUnit.dob.format("d-M-Y") }}
+							</p>
+						<p>
+							<strong>Email:</strong> {{ record.student.adminUnit.email }}
+						</p>
+						<p>
+							<strong>Phone Number:</strong> {{ record.student.adminUnit.phoneNumber }}
+						</p>
+							<p>
+								<strong>Residential Address:</strong> {{ record.student.adminUnit.rAddress }}
+							</p>
+							<p>
+								<strong>Home Address:</strong> {{ record.student.adminUnit.pAddress }}
+							</p>
+							<p>
+								<strong>PUTME Score:</strong> {{ record.student.adminUnit.putmeScore }}
+							</p>
+						{% endif %}
+                    </div>
+                </div>
+                {% if unit ends with "AdminUnit" %}
+                <div class="form-grids row widget-shadow" data-example-id="basic-forms">
+                    <div class="form-title">
+                        <h4>Jamb record:</h4>
+                    </div>
+                    <div class="form-body">
+						<p>
+							<strong>Jamb Reg:</strong> {{ record.student.adminUnit.jamb.jambNumber }}
+						</p>
+						<p>
+							<strong>{{ record.student.adminUnit.jamb.subject1 }}:</strong> {{ record.student.adminUnit.jamb.score1 }}
+						</p>
+						<p>
+							<strong>{{ record.student.adminUnit.jamb.subject2 }}:</strong> {{ record.student.adminUnit.jamb.score2 }}
+						</p>
+						<p>
+							<strong>{{ record.student.adminUnit.jamb.subject3 }}:</strong> {{ record.student.adminUnit.jamb.score3 }}
+						</p>
+						<p>
+							<strong>{{ record.student.adminUnit.jamb.subject4 }}:</strong> {{ record.student.adminUnit.jamb.score4 }}
+						</p>
+                    </div>
+                </div>
+				{% endif %}
+
+				{# health service unit #}
+                {% if unit ends with "HealthService" %}
+					<div class="form-grids row widget-shadow" data-example-id="basic-forms">
+						<div class="form-title">
+							<h4>University Health Service Receipt:</h4>
+						</div>
+						<div class="form-body">
+							<p>
+								<strong>X-ray:</strong>
+								<a id="update" class="btn btn-primary" href="{{ path('admin_result_download',{fileName: record.student.healthService.xRay}) }}">
+									<span class="fa fa-download"></span> Download X-ray Receipt!
+								</a>
+							</p>
+							<br/>
+							<p>
+								<strong>Lab Test:</strong>
+								<a id="update" class="btn btn-primary" href="{{ path('admin_result_download',{fileName: record.student.healthService.labTest}) }}">
+									<span class="fa fa-download"></span> Download Lab Test Receipt!
+								</a>
+							</p>
+						</div>
+					</div>
+                {% endif %}
+
+                {# faculty #}
+                {% if unit ends with "Faculty" %}
+					<div class="form-grids row widget-shadow" data-example-id="basic-forms">
+						<div class="form-title">
+							<h4>Faculty Receipt(s):</h4>
+						</div>
+						<div class="form-body">
+							<p>
+								<strong>Prospectus:</strong>
+								<a id="update" class="btn btn-primary" href="{{ path('admin_result_download',{fileName: record.student.faculty.prospectus}) }}">
+									<span class="fa fa-download"></span> Download Prospectus Receipt!
+								</a>
+							</p>
+							<br/>
+							<p>
+								<strong>Matriculation Gown:</strong>
+								<a id="update" class="btn btn-primary" href="{{ path('admin_result_download',{fileName: record.student.faculty.matricGown}) }}">
+									<span class="fa fa-download"></span> Download Matriculation Gown Receipt!
+								</a>
+							</p>
+							<br />
+							<p>
+								<strong>Faculty Due:</strong>
+								<a id="update" class="btn btn-primary" href="{{ path('admin_result_download',{fileName: record.student.faculty.due}) }}">
+									<span class="fa fa-download"></span> Download Faculty Due Receipt!
+								</a>
+							</p>
+						</div>
+					</div>
+                {% endif %}
+
+                {# faculty #}
+                {% if unit ends with "StudentAffairs" %}
+					<div class="form-grids row widget-shadow" data-example-id="basic-forms">
+						<div class="form-title">
+							<h4>Student Affairs Receipt(s):</h4>
+						</div>
+						<div class="form-body">
+							<p>
+								<strong>Handbook:</strong>
+								<a id="update" class="btn btn-primary" href="{{ path('admin_result_download',{fileName: record.student.studentAffairs.handbook}) }}">
+									<span class="fa fa-download"></span> Download Handbook Receipt!
+								</a>
+							</p>
+							<br/>
+							<p>
+								<strong>AAUA CD Receipt:</strong>
+								<a id="update" class="btn btn-primary" href="{{ path('admin_result_download',{fileName: record.student.studentAffairs.aauaCd}) }}">
+									<span class="fa fa-download"></span> Download AAUA CD Receipt!
+								</a>
+							</p>
+							<br />
+							<p>
+								<strong>Mobile Platform:</strong>
+								<a id="update" class="btn btn-primary" href="{{ path('admin_result_download',{fileName: record.student.studentAffairs.mobilePlatform}) }}">
+									<span class="fa fa-download"></span> Download Mobile Platform Receipt!
+								</a>
+							</p>
+						</div>
+					</div>
+                {% endif %}
+
+                {# faculty #}
+                {% if unit ends with "ExamsAndRecords" %}
+					<div class="form-grids row widget-shadow" data-example-id="basic-forms">
+						<div class="form-title">
+							<h4>Exams And Record Receipt(s):</h4>
+						</div>
+						<div class="form-body">
+							<p>
+								<strong>Jamb Admission Letter:</strong>
+								<a id="update" class="btn btn-primary" href="{{ path('admin_result_download',{fileName: record.student.examsAndRecords.jambLetter}) }}">
+									<span class="fa fa-download"></span> Download Jamb Admission Letter!
+								</a>
+							</p>
+							<br/>
+							<p>
+								<strong>AAUA Admission Letter:</strong>
+								<a id="update" class="btn btn-primary" href="{{ path('admin_result_download',{fileName: record.student.examsAndRecords.aauaLetter}) }}">
+									<span class="fa fa-download"></span> Download AAUA Admission Letter!
+								</a>
+							</p>
+							<br />
+							<p>
+								<strong>Jamb Result:</strong>
+								<a id="update" class="btn btn-primary" href="{{ path('admin_result_download',{fileName: record.student.examsAndRecords.jambResult}) }}">
+									<span class="fa fa-download"></span> Download Jamb Result!
+								</a>
+							</p>
+							<br/>
+							<p>
+								<strong>Birth Certificate:</strong>
+								<a id="update" class="btn btn-primary" href="{{ path('admin_result_download',{fileName: record.student.examsAndRecords.birthCertificate}) }}">
+									<span class="fa fa-download"></span> Download Birth Certificate!
+								</a>
+							</p>
+							<br/>
+							<p>
+								<strong>Attestation Letter:</strong>
+								<a id="update" class="btn btn-primary" href="{{ path('admin_result_download',{fileName: record.student.examsAndRecords.attestationLetter}) }}">
+									<span class="fa fa-download"></span> Download Attestation Letter!
+								</a>
+							</p>
+							<br />
+							<p>
+								<strong>State Of Origin:</strong>
+								<a id="update" class="btn btn-primary" href="{{ path('admin_result_download',{fileName: record.student.examsAndRecords.stateOfOrigin}) }}">
+									<span class="fa fa-download"></span> Download State of Origin!
+								</a>
+							</p>
+						</div>
+					</div>
+                {% endif %}
+
+				<!-- Display the list of approved topics here --->
+                {% if unit ends with "AdminUnit" %}
+					<div class="form-grids row widget-shadow" data-example-id="basic-forms">
+						<div class="form-title">
+							<h4>O-Level Result(s):</h4>
+						</div>
+						<div class="form-body">
+							{% for exam in record.student.adminUnit.exams %}
+							<p>
+								<strong>{{ exam.type }}:</strong>
+								<a id="update" class="btn btn-primary" href="{{ path('admin_result_download',{fileName: exam.result}) }}">
+									<span class="fa fa-download"></span> Download file!
+								</a>
+							</p>
+							{% endfor %}
+						</div>
+					</div>
+                {% endif %}
+			
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+		<!--footer-->
+		<div class="footer">
+		   <p>&copy; 2018 | CSC Dept. AAUA. </p>
+		</div>
+        <!--//footer-->
+	</div>
+	{% endblock %}

@@ -1,0 +1,139 @@
+{% extends "base.html.twig" %}
+{% block title %}Student - Exams And Records{% endblock %}
+{% block body %}
+	<div class="main-content">
+		<!--left-fixed -navigation-->
+		{{ include('student/navigation.html.twig',{page: "exams_and_records"}) }}
+		<!-- //header-ends -->
+		<!-- main content start-->
+		<div id="page-wrapper">
+			<div class="main-page">
+			<h3 class="title1" style="color: #F2B33F;">Exams And Records</h3>
+					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
+						<div class="form-title">
+							<h4>Upload your documents here:</h4>
+						</div>
+						<div class="form-body">
+                            {{ form_start(form) }}
+                                <table class="table table-responsive">
+                                    {% if exist %}
+                                        <tr>
+                                            <td>
+                                                {{ form_row(form.jambLetter,{attr:{disabled:"disabled"}}) }}
+                                            </td>
+                                            <td>
+                                                {{ form_row(form.aauaLetter,{attr:{disabled:"disabled"}}) }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                {{ form_row(form.birthCertificate,{attr:{disabled:"disabled"}}) }}
+                                            </td>
+                                            <td>
+                                                {{ form_row(form.stateOfOrigin,{attr:{disabled:"disabled"}}) }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                {{ form_row(form.attestationLetter,{attr:{disabled:"disabled"}}) }}
+                                            </td>
+                                            <td>
+                                                {{ form_row(form.jambResult,{attr:{disabled:"disabled"}}) }}
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                    <tr>
+                                        <td>
+                                            {{ form_row(form.jambLetter) }}
+                                        </td>
+                                        <td>
+                                            {{ form_row(form.aauaLetter) }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ form_row(form.birthCertificate) }}
+                                        </td>
+                                        <td>
+                                            {{ form_row(form.stateOfOrigin) }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ form_row(form.attestationLetter) }}
+                                        </td>
+                                        <td>
+                                            {{ form_row(form.jambResult) }}
+                                        </td>
+                                    </tr>
+                                    {% endif %}
+                                    <tr>
+                                        <td>
+                                            <a style="width:100%;" id="update" class="btn btn-primary" href="{{ path('student_affairs') }}" >
+                                                <span class="fa fa-arrow-circle-o-left"></span> Back: Student Affairs
+                                            </a>
+                                        </td>
+                                        {% if exist %}
+                                            <td>
+                                                <a style="width:100%;" id="update" class="btn btn-primary" href="{{ path('student_dashboard') }}" >
+                                                    <span class="fa fa-save"></span> Finish!
+                                                </a>
+                                            </td>
+                                        {% else %}
+                                        <td>
+                                            <button style="width:100%;" type="submit" id="update" class="btn btn-primary" >
+                                                <span class="fa fa-save"></span> Finish!
+                                            </button>
+                                        </td>
+                                        {% endif %}
+                                    </tr>
+                                </table>
+                            {{ form_end(form) }}
+						</div>
+					</div>
+			
+			
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+		<!--footer-->
+		<div class="footer">
+		   <p>&copy; 2018 | CSC Dept. AAUA. </p>
+		</div>
+        <!--//footer-->
+	</div>
+    {% endblock %}
+
+    {% block javascripts %}
+        <!-- Classie -->
+        <script src="{{ asset('control_panel/js/classie.js') }}"></script>
+        <script>
+            let update = document.getElementById('update');
+            update.onclick = function(){
+                document.getElementById('student_registration_matric_no').disabled = false;
+            }
+            var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+                showLeftPush = document.getElementById( 'showLeftPush' ),
+                body = document.body;
+
+            showLeftPush.onclick = function() {
+                classie.toggle( this, 'active' );
+                classie.toggle( body, 'cbp-spmenu-push-toright' );
+                classie.toggle( menuLeft, 'cbp-spmenu-open' );
+                disableOther( 'showLeftPush' );
+            };
+
+
+            function disableOther( button ) {
+                if( button !== 'showLeftPush' ) {
+                    classie.toggle( showLeftPush, 'disabled' );
+                }
+            }
+        </script>
+        <!--scrolling js-->
+        <script src="{{ asset('control_panel/js/jquery.nicescroll.js') }}"></script>
+        <script src="{{ asset('control_panel/js/scripts.js') }}"></script>
+        <!--//scrolling js-->
+        <!-- Bootstrap Core JavaScript -->
+        <script src="{{ asset('control_panel/js/bootstrap.js') }}"> </script>
+    {% endblock %}

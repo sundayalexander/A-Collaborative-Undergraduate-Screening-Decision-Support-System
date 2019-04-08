@@ -1,0 +1,119 @@
+{% extends "base.html.twig" %}
+{% block title %}Student - Faculty{% endblock %}
+{% block body %}
+	<div class="main-content">
+		<!--left-fixed -navigation-->
+		{{ include('student/navigation.html.twig',{page:"faculty"}) }}
+		<!-- //header-ends -->
+		<!-- main content start-->
+		<div id="page-wrapper">
+			<div class="main-page">
+			<h3 class="title1" style="color: #F2B33F;">Faculty</h3>
+					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
+						<div class="form-title">
+							<h4>Upload your Faculty Receipts:</h4>
+						</div>
+						<div class="form-body">
+                            {{ form_start(form) }}
+                                <table class="table table-responsive">
+                                    {% if exist %}
+                                        <tr>
+                                            <td>
+                                                {{ form_row(form.prospectus,{attr:{disabled:"disabled"}}) }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                {{ form_row(form.matric_gown,{attr:{disabled:"disabled"}}) }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                {{ form_row(form.due,{attr:{disabled:"disabled"}}) }}
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                    <tr>
+                                        <td>
+                                            {{ form_row(form.prospectus) }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ form_row(form.matric_gown) }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ form_row(form.due) }}
+                                        </td>
+                                    </tr>
+                                    {% endif %}
+                                    <tr>
+                                        <td>
+                                            <a style="width:100%;" id="update" class="btn btn-primary" href="{{ path('student_health_service') }}" >
+                                                <span class="fa fa-arrow-circle-o-left"></span> Back: Health Service
+                                            </a>
+                                        </td>
+                                        <td>
+                                            {% if exist %}
+                                                <a style="width:100%;" id="update" class="btn btn-primary" href="{{ path('student_affairs') }}" >
+                                                    <span class="fa fa-arrow-circle-o-right"></span> Next: Student Affairs
+                                                </a>
+                                            {% else %}
+                                            <button style="width:100%;" type="submit" id="update" class="btn btn-primary" >
+                                                <span class="fa fa-save"></span> Save and Continue
+                                            </button>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                </table>
+                            {{ form_end(form) }}
+						</div>
+					</div>
+			
+			
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+		<!--footer-->
+		<div class="footer">
+		   <p>&copy; 2018 | CSC Dept. AAUA. </p>
+		</div>
+        <!--//footer-->
+	</div>
+    {% endblock %}
+
+    {% block javascripts %}
+        <!-- Classie -->
+        <script src="{{ asset('control_panel/js/classie.js') }}"></script>
+        <script>
+            let update = document.getElementById('update');
+            update.onclick = function(){
+                document.getElementById('student_registration_matric_no').disabled = false;
+            }
+            var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+                showLeftPush = document.getElementById( 'showLeftPush' ),
+                body = document.body;
+
+            showLeftPush.onclick = function() {
+                classie.toggle( this, 'active' );
+                classie.toggle( body, 'cbp-spmenu-push-toright' );
+                classie.toggle( menuLeft, 'cbp-spmenu-open' );
+                disableOther( 'showLeftPush' );
+            };
+
+
+            function disableOther( button ) {
+                if( button !== 'showLeftPush' ) {
+                    classie.toggle( showLeftPush, 'disabled' );
+                }
+            }
+        </script>
+        <!--scrolling js-->
+        <script src="{{ asset('control_panel/js/jquery.nicescroll.js') }}"></script>
+        <script src="{{ asset('control_panel/js/scripts.js') }}"></script>
+        <!--//scrolling js-->
+        <!-- Bootstrap Core JavaScript -->
+        <script src="{{ asset('control_panel/js/bootstrap.js') }}"> </script>
+    {% endblock %}

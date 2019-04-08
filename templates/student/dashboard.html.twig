@@ -1,0 +1,105 @@
+{% extends "base.html.twig" %}
+{% block title %} Dashboard {% endblock %}
+{% block meta %}
+    {{ parent() }}
+    <meta name="keywords" content="Undergraduate Project Topics Allocation System" />
+    {% endblock %}
+{% block body %}
+	<div class="main-content">
+      {{ include('student/navigation.html.twig', {page:"dashboard"})  }}
+		<!-- main content start-->
+		<div id="page-wrapper">
+			<div class="main-page">
+				<div class="row-one"><br/><br/>
+                    {% if approved %}
+					<div class="row row-pane">
+						<div class="stats-left " style="padding:1.2em;">
+							<h4>Screening successful!</h4>
+						</div>
+						<div class="stats-right">
+							<span class="fa fa-exclamation-circle fa-2x" style="color: white;"></span>
+						</div>
+						<div class="clearfix"> </div>	
+					</div>
+                    {% else %}
+					<div class="row row-pane states-mdl">
+						<div class="stats-left" style="padding:1.2em;">
+							<h4>completed!</h4>
+						</div>
+                        <div class="stats-right">
+                            <h2 style="color: white;">{{ percentage }}%</h2>
+                        </div>
+						<div class="clearfix"> </div>
+					</div>
+                    {% endif %}
+					<div class="clearfix"> </div>	
+				</div>
+					<br/>
+				<div class="clearfix"> </div>
+			</div><br/><br/><br/><br/>
+			<div class="row calender widget-shadow" style="text-align: center;">
+                <h3 class="title1" style="color: #F2B33F;">My Account</h3>
+                <style>
+                    .boards{
+                        display: inline-block;
+                        margin: 0px auto;
+                        text-decoration: underline;
+                        text-align: center;
+                        padding: 2em;
+                        background-color: #a5a5a5;
+                    }
+                    .boards a{
+                        color: #585858;
+                        padding: 2em;
+                    }
+                </style>
+                <div class="boards">
+                    <a href="{{ path("student_admin_unit") }}">Admission Unit</a>
+                </div>
+                <div class="boards">
+                    <a href="{{ path('student_health_service') }}">Health Service</a>
+                </div>
+                <div class="boards">
+                    <a href="{{ path('student_faculty') }}">Faculty</a>
+                </div>
+                <div class="boards">
+                    <a href="{{ path('student_affairs') }}">Student Affairs</a>
+                </div>
+            </div>
+		</div>
+		<!--footer-->
+		<div class="footer">
+		   <p>&copy; 2018 | An Online Undergraduate Student's Screening Decision Support System </p>
+		</div>
+        <!--//footer-->
+	</div>
+{% endblock %}
+{% block javascripts %}
+    <!-- Classie -->
+    <script src="{{ asset('control_panel/js/classie.js') }}"></script>
+    <script>
+        var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+            showLeftPush = document.getElementById( 'showLeftPush' ),
+            body = document.body;
+
+        showLeftPush.onclick = function() {
+            classie.toggle( this, 'active' );
+            classie.toggle( body, 'cbp-spmenu-push-toright' );
+            classie.toggle( menuLeft, 'cbp-spmenu-open' );
+            disableOther( 'showLeftPush' );
+        };
+
+
+        function disableOther( button ) {
+            if( button !== 'showLeftPush' ) {
+                classie.toggle( showLeftPush, 'disabled' );
+            }
+        }
+    </script>
+    <!--scrolling js-->
+    <script src="{{ asset('control_panel/js/jquery.nicescroll.js') }}"></script>
+    <script src="{{ asset('control_panel/js/scripts.js') }}"></script>
+    <!--//scrolling js-->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ asset('control_panel/js/bootstrap.js') }}"> </script>
+{% endblock %}
