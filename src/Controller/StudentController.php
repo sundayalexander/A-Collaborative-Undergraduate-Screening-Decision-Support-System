@@ -43,7 +43,7 @@ class StudentController extends AbstractController
         $student = new Student();
         $student->unserialize($session->get("student"));
         $student = $this->getDoctrine()->getRepository(Student::class)->find($student->getId());
-        $count = !is_null($student->getAdminUnit())?$count + 1:$count;
+        $count = $student->getAdminUnit() !== null ?$count + 1:$count;
         $approved = !is_null($student->getAdminUnit()) && $student->getAdminUnit()->getApprove()?$approved + 1:$approved;
         if(!is_null($student->getAdminUnit())){
             $count = !is_null($student->getAdminUnit()->getExams())?$count + 1:$count;
